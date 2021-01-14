@@ -2,7 +2,33 @@
 class Create extends React.Component {
     render = () => {
         return <div id="create-trip-container">
+            <h3>Add a Trip!</h3>
 
+            <form>
+
+                <label htmlFor="name">Name</label>
+                <br/>
+                <input type="text" id="name" onChange={this.props.handleChange} />
+                <br/>
+
+                <label htmlFor="date">Dates to Travel</label>
+                <br/>
+                <input type="text" id="date" onChange={this.props.handleChange} />
+                <br/>
+
+                <label htmlFor="name">Description</label>
+                <br/>
+                <input type="text" id="description" onChange={this.props.handleChange} />
+                <br/>
+
+                <label htmlFor="name">Image</label>
+                <br/>
+                <input type="text" id="image" onChange={this.props.handleChange} />
+                <br/>
+
+                <input type="submit" value="Add This Trip" />
+
+            </form>
         </div>
     }
 }
