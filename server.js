@@ -6,6 +6,7 @@ require('dotenv').config()
 // Config
 const app = express()
 const PORT = process.env.PORT
+const MONGODB_URI = process.env.MONGODB_URI
 
 // Middleware
 app.use(express.json())
@@ -14,7 +15,6 @@ app.use(express.static('public'))
 // Controllers
 
 // Connect to DB
-const MONGODB_URI = process.env.MONGODB_URI
 mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
