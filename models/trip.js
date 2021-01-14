@@ -6,6 +6,7 @@ const tripSchema = new mongoose.Schema({
     name: String,
     date: String,
     description: String,
+    image: String
 })
 
 // Create collection
