@@ -1,3 +1,32 @@
+// Create Component
+class Create extends React.Component {
+    render = () => {
+        return <div id="create-trip-container">
+
+        </div>
+    }
+}
+
+// Show Component
+class Show extends React.Component {
+    render = () => {
+        return <div id="show-trip-container">
+
+        </div>
+    }
+}
+
+// Edit Component
+class Edit extends React.Component {
+    render = () => {
+        return <div id="edit-trip-container">
+
+        </div>
+    }
+}
+
+
+// Parent Component
 class App extends React.Component {
     render = () => {
         return <div>
@@ -18,7 +47,7 @@ class App extends React.Component {
 
                             {trip.description}
                             <br/>
- 
+
                             <button value={trip._id} onClick={this.deleteTrip}>
                                 Remove
                             </button>
@@ -27,7 +56,7 @@ class App extends React.Component {
                             <details>
                                 <summary>Edit Trip Details</summary>
                                 <form id={trip._id} onSubmit={this.updateTrip}>
-                                    
+
                                     <label htmlFor="name">Name</label>
                                     <br/>
                                     <input type="text" id="name" defaultValue={trip.name} onChange={this.handleChange}/>
