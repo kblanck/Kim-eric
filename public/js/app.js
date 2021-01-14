@@ -4,7 +4,7 @@ class Create extends React.Component {
         return <div id="create-trip-container">
             <h3>Add a Trip!</h3>
 
-            <form>
+            <form onSubmit={this.props.handleSubmit}>
 
                 <label htmlFor="name">Name</label>
                 <br/>
@@ -112,6 +112,8 @@ class App extends React.Component {
                 </ul>
             </section>
 
+            <Create></Create>
+            
         </div>
     }
 }
