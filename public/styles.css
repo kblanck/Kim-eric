@@ -1,8 +1,74 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
-}
+} */
 
 body {
-    background-color: #eee;
+    background-color:#E0E0E0;
+    font-family: Helvetica;
+    font-size: .8em;
 }
+
+h1 {
+    text-align: center;
+    font-family: 'Lora', serif;
+    font-size: 6em;
+    margin-top: .2em;
+}
+
+h3 {
+    font-family: 'Lora', serif;
+}
+
+#show-trip-container {
+    text-align: center;
+}
+
+#notes {
+    font-size: .8em;
+    background-color: gold;
+    border: 1px solid black;
+    padding: .25em;
+    margin: .5em;
+}
+
+#describe {
+    font-size: .8em;
+}
+
+img {
+    width: 30vw;
+    height: 30%;
+    border: 8px solid ghostwhite;
+    border-bottom: 32px solid ghostwhite;
+    border-radius: 5px;
+    margin-bottom: 1em;
+}
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+li {
+    margin: 1em 1em 1em 0;
+}
+
+button, input[type=submit] {
+    background-color: ghostwhite;
+    border: 1px solid gray;
+    font-size: .8em;
+    margin: .5em;
+}
+
+details {
+    font-size: .8em;
+}
+
+#create-trip-container {
+    text-align: center;
+}
+
+input[type=text], #description {
+    width: 150px;
+} 

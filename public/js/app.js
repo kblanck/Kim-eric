@@ -18,7 +18,7 @@ class Create extends React.Component {
 
                 <label htmlFor="description">Description</label>
                 <br/>
-                <input type="text" id="description" onChange={this.props.handleChange} />
+                <input type="textarea" id="description" onChange={this.props.handleChange} />
                 <br/>
 
                 <label htmlFor="image">Image</label>
@@ -40,16 +40,24 @@ class Show extends React.Component {
             <ul>
                 {this.props.state.trips.map((trip) => {
                     return <li key={trip._id}>
+                        
+
                         <img src={trip.image} />
                         <br/>
 
-                        <p>{trip.name}</p>
+                       
+                        <strong>{trip.name}</strong>
                         <br/>
 
-                        <p>{trip.date}</p>
+                        {trip.date}
                         <br/>
 
-                        <p>{trip.description}</p>
+                        <span id="notes">
+                            Notes
+                        </span>
+                        <span id="describe">
+                            {trip.description}
+                        </span>
                         <br/>
 
                         <button value={trip._id} onClick={this.props.deleteTrip}>
@@ -162,11 +170,11 @@ class App extends React.Component {
     }
     render = () => {
         return <div>
-            <h1>Trips on Trips</h1>
+            <h1>Trips On Trips</h1>
+
+            <Show handleSubmit={this.handleSubmit} handleChange={this.handleChange} deleteTrip={this.deleteTrip} updateTrip={this.updateTrip} state={this.state}></Show>
 
             <Create handleSubmit={this.handleSubmit} handleChange={this.handleChange} state={this.state}></Create>
-            <hr/>
-            <Show handleSubmit={this.handleSubmit} handleChange={this.handleChange} deleteTrip={this.deleteTrip} updateTrip={this.updateTrip} state={this.state}></Show>
 
         </div>
     }
