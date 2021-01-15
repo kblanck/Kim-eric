@@ -65,21 +65,18 @@ li {
 }
 
 
-<<<<<<< HEAD
-/* don't edit below */
-=======
 /* Edit Container  */
 details[open] {
     background-color: rgba(0, 0, 0, 0.4);
     color: ghostwhite;
-    width: 30vw;
+    width: 20vw;
     padding: .5em;
     font-size: .8rem;
     border-radius: .5em;
 }
->>>>>>> 404d6f2066d27da3c23688bf785bac76e5ad22a4
 
 details>summary {
+    text-align: center;
     cursor: pointer;
     font-size: .8rem;
 }
