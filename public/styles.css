@@ -8,11 +8,14 @@ h1 {
     text-align: center;
     font-family: 'Lora', serif;
     font-size: 6em;
-    margin-top: .2em;
+    margin: .2em;
 }
 
 h3 {
+    text-align: center;
     font-family: 'Lora', serif;
+    font-size: 4em;
+    margin: .2em;
 }
 
 /*
@@ -39,15 +42,7 @@ h6 {
     font-size: .8em;
 }
 
-img {
-    width: 92%;
-    height: 20%;
-    border: 8px solid ghostwhite;
-    border-bottom: 32px solid ghostwhite;
-    border-radius: 5px;
-    margin-bottom: 1em;
-}
-
+/* Show Container */
 #show-trip-container {
     text-align: center;
 }
@@ -60,17 +55,26 @@ ul {
 li {
     margin: 1em 1em 1em 0;
     display: inline-block;
+    vertical-align: top;
     padding: 1em;
     width: 20vw;
 }
 
+img {
+    width: 92%;
+    height: 20%;
+    border: 8px solid ghostwhite;
+    border-bottom: 32px solid ghostwhite;
+    border-radius: 5px;
+    margin-bottom: 1em;
+}
 
 /* Edit Container  */
 details[open] {
     background-color: rgba(0, 0, 0, 0.4);
     color: ghostwhite;
     width: 20vw;
-    padding: .5em;
+    padding: 0 .5em .5em .5em;
     font-size: .8rem;
     border-radius: .5em;
 }
@@ -79,13 +83,14 @@ details>summary {
     text-align: center;
     cursor: pointer;
     font-size: .8rem;
+    padding: .5em;
 }
 
 details>summary::-webkit-details-marker {
   display: none;
 }
 
-summary:focus {
+*:focus {
     outline: none;
 }
 details form {
@@ -107,11 +112,27 @@ details input {
 /* Create Trip Container */
 #create-trip-container {
     text-align: center;
+    margin: 1em auto;
+    padding: 1em;
+    width: 20vw;
+}
+
+#polaroid-square {
+    background-color: dimgrey;
+    color: ghostwhite;
+    font-size: 1.2em;
+    width: 92%;
+    height: 20%;
+    border: 8px solid ghostwhite;
+    border-bottom: 32px solid ghostwhite;
+    border-radius: 2px;
+    margin-bottom: 1em;
+    padding: .5em;
 }
 
 #description {
-    resize: none; 
-    width: 140px;  
+    resize: none;
+    width: 140px;
     font-family: Helvetica;
     font-size: .8em;
 }

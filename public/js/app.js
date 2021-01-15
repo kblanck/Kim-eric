@@ -1,34 +1,37 @@
 // Create Component
 class Create extends React.Component {
     render = () => {
-        return <div id="create-trip-container">
+        return <div>
             <h3>Add a Trip!</h3>
+            <div id="create-trip-container">
+                <div id="polaroid-square">
+                    <form id="create" enctype="multipart/form-data" onSubmit={this.props.handleSubmit}>
 
-            <form id="create" onSubmit={this.props.handleSubmit}>
+                        <label htmlFor="name">Where to?</label>
+                        <br/>
+                        <input type="text" id="name" onChange={this.props.handleChange} />
+                        <br/>
 
-                <label htmlFor="name">Where to?</label>
-                <br/>
-                <input type="text" id="name" onChange={this.props.handleChange} />
-                <br/>
+                        <label htmlFor="date">Dates to Travel</label>
+                        <br/>
+                        <input type="date" id="date" onChange={this.props.handleChange} />
+                        <br/>
 
-                <label htmlFor="date">Dates to Travel</label>
-                <br/>
-                <input type="date" id="date" onChange={this.props.handleChange} />
-                <br/>
+                        <label htmlFor="image">Image URL</label>
+                        <br/>
+                        <input type="file" id="image" onChange={this.props.handleChange} />
+                        <br/>
 
-                <label htmlFor="image">Image URL</label>
-                <br/>
-                <input type="text" id="image" onChange={this.props.handleChange} />
-                <br/>
+                        <label htmlFor="description">Notes</label>
+                        <br/>
+                        <textarea id="description" onChange={this.props.handleChange} />
+                        <br/>
 
-                <label htmlFor="description">Notes</label>
-                <br/>
-                <textarea id="description" onChange={this.props.handleChange} />
-                <br/>
+                        <input type="submit" value="Add This Trip" />
 
-                <input type="submit" value="Add This Trip" />
-
-            </form>
+                    </form>
+                </div>
+            </div>
         </div>
     }
 }
@@ -175,3 +178,9 @@ ReactDOM.render(
     <App></App>,
     document.querySelector('main')
 )
+
+$(() => {
+    $("body").on("click", "#update-button",() => {
+        $("details").removeAttr("open")
+    })
+})
