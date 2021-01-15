@@ -4,26 +4,26 @@ class Create extends React.Component {
         return <div id="create-trip-container">
             <h3>Add a Trip!</h3>
 
-            <form onSubmit={this.props.handleSubmit}>
+            <form id="create" onSubmit={this.props.handleSubmit}>
 
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">Where to?</label>
                 <br/>
                 <input type="text" id="name" onChange={this.props.handleChange} />
                 <br/>
 
                 <label htmlFor="date">Dates to Travel</label>
                 <br/>
-                <input type="text" id="date" onChange={this.props.handleChange} />
+                <input type="date" id="date" onChange={this.props.handleChange} />
                 <br/>
 
-                <label htmlFor="description">Description</label>
-                <br/>
-                <input type="textarea" id="description" onChange={this.props.handleChange} />
-                <br/>
-
-                <label htmlFor="image">Image</label>
+                <label htmlFor="image">Image URL</label>
                 <br/>
                 <input type="text" id="image" onChange={this.props.handleChange} />
+                <br/>
+
+                <label htmlFor="description">Notes</label>
+                <br/>
+                <textarea id="description" onChange={this.props.handleChange} />
                 <br/>
 
                 <input type="submit" value="Add This Trip" />
