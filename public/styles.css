@@ -15,14 +15,15 @@ h3 {
     font-family: 'Lora', serif;
 }
 
+/*
 h5 {
     width: 55px;
     font-size: .8em;
     background-color: rgb(245, 132, 245);
-    /* border: 1px solid black; */
     padding: .25em;
     margin: -1em;
 }
+*/
 
 h6 {
     width: 40px;
@@ -87,10 +88,6 @@ details>summary::-webkit-details-marker {
   display: none;
 }
 
-<<<<<<< HEAD
-/* don't edit above */
-
-=======
 summary:focus {
     outline: none;
 }
@@ -104,7 +101,6 @@ details form {
 details input {
     width: 97%;
 }
->>>>>>> 404d6f2066d27da3c23688bf785bac76e5ad22a4
 
 #update-button {
     margin-top: .3em;

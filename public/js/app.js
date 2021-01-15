@@ -44,11 +44,11 @@ class Show extends React.Component {
                         <img src={trip.image} />
                         <br/>
 
-                       
+{/*                        
                         <h5>
                             Where to?
                         </h5>
-                        <br/>
+                        <br/> */}
 
                         <strong>{trip.name}</strong>
                         <br/>
