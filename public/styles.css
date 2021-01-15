@@ -20,16 +20,23 @@ h3 {
     font-family: 'Lora', serif;
 }
 
-#show-trip-container {
-    text-align: center;
+h5 {
+    width: 55px;
+    font-size: .8em;
+    background-color: rgb(245, 132, 245);
+    /* border: 1px solid black; */
+    padding: .25em;
+    margin: -1em;
 }
 
-#notes {
+h6 {
+    width: 40px;
     font-size: .8em;
     background-color: gold;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     padding: .25em;
-    margin: .5em;
+    margin: -1em;
+    transform: rotate(-5deg)
 }
 
 #describe {
@@ -37,12 +44,16 @@ h3 {
 }
 
 img {
-    width: 30vw;
-    height: 30%;
+    width: 20vw;
+    height: 20%;
     border: 8px solid ghostwhite;
     border-bottom: 32px solid ghostwhite;
     border-radius: 5px;
     margin-bottom: 1em;
+}
+
+#show-trip-container {
+    text-align: center;
 }
 
 ul {
@@ -53,6 +64,8 @@ ul {
 li {
     margin: 1em 1em 1em 0;
     display: inline-block;
+    padding: 1em;
+    width: 20vw;
 }
 
 

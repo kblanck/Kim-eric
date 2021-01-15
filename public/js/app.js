@@ -36,8 +36,7 @@ class Create extends React.Component {
 // Show Component
 class Show extends React.Component {
     render = () => {
-        return <div id="show-trip-container">
-            <ul>
+        return <ul id="show-trip-container">
                 {this.props.state.trips.map((trip) => {
                     return <li key={trip._id}>
                         
@@ -46,15 +45,22 @@ class Show extends React.Component {
                         <br/>
 
                        
+                        <h5>
+                            Where to?
+                        </h5>
+                        <br/>
+
                         <strong>{trip.name}</strong>
                         <br/>
 
                         {trip.date}
                         <br/>
 
-                        <span id="notes">
+                        <h6 id="notes">
                             Notes
-                        </span>
+                        </h6>
+                        <br/>
+
                         <span id="describe">
                             {trip.description}
                         </span>
@@ -69,7 +75,6 @@ class Show extends React.Component {
                     </li>
                 })}
             </ul>
-        </div>
     }
 }
 
