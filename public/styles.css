@@ -1,8 +1,3 @@
-/* * {
-    margin: 0;
-    padding: 0;
-} */
-
 body {
     background-color:#E0E0E0;
     font-family: Helvetica;
@@ -56,25 +51,45 @@ li {
 
 */
 
-/* Edit Container 
-
-button, input[type=submit] {
-    background-color: ghostwhite;
-    border: 1px solid gray;
-    font-size: .8em;
-    margin: .5em;
+/* Edit Container  */
+details[open] {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: ghostwhite;
+    width: 30vw;
+    padding: .5em;
+    font-size: .8rem;
+    border-radius: .5em;
 }
 
-details {
-    font-size: .8em;
+details>summary {
+    cursor: pointer;
+    font-size: .8rem;
 }
 
-*/
+details>summary::-webkit-details-marker {
+  display: none;
+}
 
+summary:focus {
+    outline: none;
+}
+details form {
+    padding: .1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+details input {
+    width: 97%;
+}
+
+#update-button {
+    margin-top: .3em;
+    align-self: center;
+}
+
+/* Create Trip Container */
 #create-trip-container {
     text-align: center;
 }
-
-input[type=text], #description {
-    width: 150px;
-} 
