@@ -44,7 +44,7 @@ class Show extends React.Component {
                         <img src={trip.image} />
                         <br/>
 
-{/*                        
+{/*
                         <h5>
                             Where to?
                         </h5>
@@ -88,7 +88,7 @@ class Edit extends React.Component {
                     <label htmlFor="name">Name</label>
                     <input type="text" id="name" defaultValue={this.props.trip.name} onChange={this.props.handleChange}/>
                     <label htmlFor="date">Date</label>
-                    <input type="text" id="date" defaultValue={this.props.trip.date} onChange={this.props.handleChange}/>
+                    <input type="date" id="date" defaultValue={this.props.trip.date} onChange={this.props.handleChange}/>
                     <label htmlFor="description">Description</label>
                     <input type="text" id="description" defaultValue={this.props.trip.description} onChange={this.props.handleChange}/>
                     <label htmlFor="name">Image</label>
