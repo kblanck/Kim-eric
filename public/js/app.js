@@ -40,12 +40,12 @@ class Show extends React.Component {
             <ul>
                 {this.props.state.trips.map((trip) => {
                     return <li key={trip._id}>
-                        
+
 
                         <img src={trip.image} />
                         <br/>
 
-                       
+
                         <strong>{trip.name}</strong>
                         <br/>
 
@@ -80,29 +80,15 @@ class Edit extends React.Component {
             <details>
                 <summary>Edit Trip Details</summary>
                 <form id={this.props.trip._id} onSubmit={this.props.updateTrip}>
-
                     <label htmlFor="name">Name</label>
-                    <br/>
                     <input type="text" id="name" defaultValue={this.props.trip.name} onChange={this.props.handleChange}/>
-                    <br/>
-
                     <label htmlFor="date">Date</label>
-                    <br/>
                     <input type="text" id="date" defaultValue={this.props.trip.date} onChange={this.props.handleChange}/>
-                    <br/>
-
                     <label htmlFor="description">Description</label>
-                    <br/>
                     <input type="text" id="description" defaultValue={this.props.trip.description} onChange={this.props.handleChange}/>
-                    <br/>
-
                     <label htmlFor="name">Image</label>
-                    <br/>
                     <input type="text" id="image" defaultValue={this.props.trip.image} onChange={this.props.handleChange}/>
-                    <br/>
-
-                    <input type="submit" value="Update Details" />
-
+                    <input id="update-button" type="submit" value="Update Details" />
                 </form>
             </details>
         </div>
