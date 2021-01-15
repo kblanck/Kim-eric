@@ -175,3 +175,9 @@ ReactDOM.render(
     <App></App>,
     document.querySelector('main')
 )
+
+$(() => {
+    $("body").on("click", "#update-button",() => {
+        $("details").removeAttr("open")
+    })
+})
