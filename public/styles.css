@@ -19,7 +19,7 @@ h1 {
 h3 {
     font-family: 'Lora', serif;
 }
-
+ /* Show Container
 #show-trip-container {
     text-align: center;
 }
@@ -54,6 +54,10 @@ li {
     margin: 1em 1em 1em 0;
 }
 
+*/
+
+/* Edit Container 
+
 button, input[type=submit] {
     background-color: ghostwhite;
     border: 1px solid gray;
@@ -64,6 +68,8 @@ button, input[type=submit] {
 details {
     font-size: .8em;
 }
+
+*/
 
 #create-trip-container {
     text-align: center;
