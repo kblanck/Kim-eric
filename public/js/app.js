@@ -37,28 +37,6 @@ class Create extends React.Component {
 class Show extends React.Component {
     render = () => {
         return <div id="show-trip-container">
-
-        </div>
-    }
-}
-
-// Edit Component
-class Edit extends React.Component {
-    render = () => {
-        return <div id="edit-trip-container">
-
-        </div>
-    }
-}
-
-
-// Parent Component
-class App extends React.Component {
-    render = () => {
-        return <div>
-            <h1>Trips on Trips</h1>
-
-            <section id="posted-trips">
                 <ul>
                     {this.state.trips.map((trip) => {
                         return <li key={trip._id}>
@@ -79,6 +57,18 @@ class App extends React.Component {
                             </button>
                             <br/>
 
+
+                        </li>
+                    }}
+                </ul>
+        </div>
+    }
+}
+
+// Edit Component
+class Edit extends React.Component {
+    render = () => {
+        return <div id="edit-trip-container">
                             <details>
                                 <summary>Edit Trip Details</summary>
                                 <form id={trip._id} onSubmit={this.updateTrip}>
@@ -107,13 +97,48 @@ class App extends React.Component {
 
                                 </form>
                             </details>
-                        </li>
-                    }}
-                </ul>
-            </section>
+                    </div>
+    }
+}
 
-            <Create></Create>
-            
+
+// Parent Component
+class App extends React.Component {
+    state = {
+        name: '',
+        date: '',
+        description: '',
+        image: '',
+        trips: []
+    }
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.id]: event.target.value
+        })
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault()
+        axios.post('/trips', this.state).then((response) => {
+            this.setState({
+                trips: response.data,
+                name: '',
+                date: '',
+                description: '',
+                image: ''
+            })
+        })
+    }
+
+
+
+    render = () => {
+        return <div>
+            <h1>Trips on Trips</h1>
+
+            <Create handleSubmit={this.handleSubmit} handleChange={this.handleChange} state={this.state}></Create>      
+
         </div>
     }
 }
