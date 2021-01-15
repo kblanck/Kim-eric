@@ -34,37 +34,37 @@ class Create extends React.Component {
 }
 
 // Show Component
-// class Show extends React.Component {
-//     render = () => {
-//         return <div id="show-trip-container">
-//                 <ul>
-//                     {this.state.trips.map((trip) => {
-//                         return <li key={trip._id}>
-//                             <img src={trip.image} />
-//                             <br/>
-//
-//                             {trip.name}
-//                             <br/>
-//
-//                             {trip.date}
-//                             <br/>
-//
-//                             {trip.description}
-//                             <br/>
-//
-//                             <button value={trip._id} onClick={this.deleteTrip}>
-//                                 Remove
-//                             </button>
-//                             <br/>
-//
-//
-//                         </li>
-//                     }}
-//                 </ul>
-//         </div>
-//     }
-// }
-//
+class Show extends React.Component {
+    render = () => {
+        return <div id="show-trip-container">
+                <ul>
+                    {this.props.state.trips.map((trip) => {
+                        return <li key={trip._id}>
+                            <img src={trip.image} />
+                            <br/>
+
+                            <p>{trip.name}</p>
+                            <br/>
+
+                            <p>{trip.date}</p>
+                            <br/>
+
+                            <p>{trip.description}</p>
+                            <br/>
+
+                            <button value={trip._id} onClick={this.props.deleteTrip}>
+                                Remove
+                            </button>
+                            <br/>
+
+
+                        </li>
+                    })}
+                </ul>
+        </div>
+    }
+}
+
 // // Edit Component
 // class Edit extends React.Component {
 //     render = () => {
@@ -135,11 +135,27 @@ class App extends React.Component {
 
         })
     }
+    deleteTrip = (event) => {
+        axios.delete('/trips/' + event.target.value).then((res) => {
+            this.setState({
+                trips: res.data
+            })
+        })
+    }
+    componentDidMount = () => {
+        axios.get('/trips').then((res) => {
+            this.setState({
+                trips: res.data
+            })
+        })
+    }
     render = () => {
         return <div>
             <h1>Trips on Trips</h1>
 
             <Create handleSubmit={this.handleSubmit} handleChange={this.handleChange} state={this.state}></Create>
+            <hr/>
+            <Show handleSubmit={this.handleSubmit} handleChange={this.handleChange} deleteTrip={this.deleteTrip} state={this.state}></Show>
 
         </div>
     }
