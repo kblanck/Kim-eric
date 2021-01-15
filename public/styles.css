@@ -108,3 +108,10 @@ details input {
 #create-trip-container {
     text-align: center;
 }
+
+#description {
+    resize: none; 
+    width: 140px;  
+    font-family: Helvetica;
+    font-size: .8em;
+}
