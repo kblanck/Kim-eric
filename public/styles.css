@@ -85,7 +85,7 @@ details>summary::-webkit-details-marker {
   display: none;
 }
 
-summary:focus {
+*:focus {
     outline: none;
 }
 details form {
@@ -110,8 +110,8 @@ details input {
 }
 
 #description {
-    resize: none; 
-    width: 140px;  
+    resize: none;
+    width: 140px;
     font-family: Helvetica;
     font-size: .8em;
 }
