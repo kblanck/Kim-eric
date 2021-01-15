@@ -69,13 +69,14 @@ li {
 details[open] {
     background-color: rgba(0, 0, 0, 0.4);
     color: ghostwhite;
-    width: 30vw;
+    width: 20vw;
     padding: .5em;
     font-size: .8rem;
     border-radius: .5em;
 }
 
 details>summary {
+    text-align: center;
     cursor: pointer;
     font-size: .8rem;
 }
