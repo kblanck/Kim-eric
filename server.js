@@ -13,6 +13,8 @@ app.use(express.json())
 app.use(express.static('public'))
 
 // Controllers
+const tripsController = require('./controllers/trips_controller.js')
+app.use('/trips', tripsController)
 
 // Connect to DB
 mongoose.connect(MONGODB_URI, {
