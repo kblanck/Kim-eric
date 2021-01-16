@@ -133,6 +133,10 @@ class App extends React.Component {
         })
     }
     deleteTrip = (event) => {
+       let deletePrompt = prompt('Are you sure you want to delete?');
+       if (deletePrompt === null) {
+           return;
+       }
         axios.delete('/trips/' + event.target.value).then((res) => {
             this.setState({
                 trips: res.data
