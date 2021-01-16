@@ -133,15 +133,15 @@ class App extends React.Component {
         })
     }
     deleteTrip = (event) => {
-       let deletePrompt = prompt('Are you sure you want to delete?');
-       if (deletePrompt === null) {
-           return;
-       }
-        axios.delete('/trips/' + event.target.value).then((res) => {
-            this.setState({
-                trips: res.data
+        if (confirm("Are you sure you want to delete?")) {
+            axios.delete('/trips/' + event.target.value).then((res) => {
+                this.setState({
+                    trips: res.data
+                })
             })
-        })
+          } else {
+            return;
+          }
     }
     componentDidMount = () => {
         axios.get('/trips').then((res) => {
