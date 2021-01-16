@@ -5,7 +5,7 @@ class Create extends React.Component {
             <h3>Add a Trip!</h3>
             <div id="create-trip-container">
                 <div id="polaroid-square">
-                    <form id="create" enctype="multipart/form-data" onSubmit={this.props.handleSubmit}>
+                    <form id="create" encType="multipart/form-data" onSubmit={this.props.handleSubmit}>
 
                         <label htmlFor="name">Where to?</label>
                         <br/>
@@ -19,7 +19,7 @@ class Create extends React.Component {
 
                         <label htmlFor="image">Image</label>
                         <br/>
-                        <input type="file" id="image" onChange={this.props.handleChange} />
+                        <input type="text" id="image" onChange={this.props.handleChange} />
                         <br/>
 
                         <label htmlFor="description">Notes</label>
