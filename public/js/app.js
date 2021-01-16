@@ -5,22 +5,25 @@ class Create extends React.Component {
             <h3>Add a Trip!</h3>
             <div id="create-trip-container">
                 <div id="polaroid-square">
-                    <form id="create" enctype="multipart/form-data" onSubmit={this.props.handleSubmit}>
+
+                    <form id="create" encType="multipart/form-data" onSubmit={this.props.handleSubmit}>
+
+
                         <label htmlFor="name">Where to?</label>
                         <br/>
-                        <input type="text" id="name" onChange={this.props.handleChange} />
+                        <input type="text" id="name" value={this.props.state.name} onChange={this.props.handleChange} />
                         <br/>
                         <label htmlFor="date">Dates to Travel</label>
                         <br/>
-                        <input type="date" id="date" onChange={this.props.handleChange} />
+                        <input type="date" id="date" value={this.props.state.date} onChange={this.props.handleChange} />
                         <br/>
                         <label htmlFor="image">Image</label>
                         <br/>
-                        <input type="file" id="image" onChange={this.props.handleChange} />
+                        <input type="text" id="image" value={this.props.state.image} onChange={this.props.handleChange} />
                         <br/>
                         <label htmlFor="description">Notes</label>
                         <br/>
-                        <textarea id="description" onChange={this.props.handleChange} />
+                        <textarea id="description" value={this.props.state.description} onChange={this.props.handleChange} />
                         <br/>
                         <input type="submit" value="Add This Trip" />
                     </form>
@@ -58,7 +61,7 @@ class Show extends React.Component {
                             Remove
                         </button>
                         <br/>
-                        <Edit handleSubmit={this.props.handleSubmit} handleChange={this.props.handleChange} deleteTrip={this.props.deleteTrip} updateTrip={this.props.updateTrip} state={this.props.state} trip={trip}></Edit>
+                        <Edit handleSubmit={this.props.handleSubmit} deleteTrip={this.props.deleteTrip} updateTripsArr={this.props.updateTripsArr} state={this.props.state} trip={trip}></Edit>
                     </li>
                 })}
             </ul>
@@ -66,19 +69,27 @@ class Show extends React.Component {
 }
 // Edit Component
 class Edit extends React.Component {
+    handleEditChange = () => {
+        this.props.trip[event.target.id] = event.target.value
+    }
+    updateTrip = (event) => {
+        event.preventDefault()
+        axios.put('/trips/' + event.target.id, this.props.trip).then((res) => {})
+        this.props.updateTripsArr()
+    }
     render = () => {
         return <div id="edit-trip-container">
             <details>
                 <summary>Edit Trip Details</summary>
-                <form id={this.props.trip._id} onSubmit={this.props.updateTrip}>
+                <form id={this.props.trip._id} onSubmit={this.updateTrip}>
                     <label htmlFor="name">Name</label>
-                    <input type="text" id="name" defaultValue={this.props.trip.name} onChange={this.props.handleChange}/>
+                    <input type="text" id="name" defaultValue={this.props.trip.name} onChange={this.handleEditChange}/>
                     <label htmlFor="date">Date</label>
-                    <input type="date" id="date" defaultValue={this.props.trip.date} onChange={this.props.handleChange}/>
+                    <input type="date" id="date" defaultValue={this.props.trip.date} onChange={this.handleEditChange}/>
                     <label htmlFor="description">Description</label>
-                    <input type="text" id="description" defaultValue={this.props.trip.description} onChange={this.props.handleChange}/>
+                    <input type="text" id="description" defaultValue={this.props.trip.description} onChange={this.handleEditChange}/>
                     <label htmlFor="name">Image</label>
-                    <input type="text" id="image" defaultValue={this.props.trip.image} onChange={this.props.handleChange}/>
+                    <input type="text" id="image" defaultValue={this.props.trip.image} onChange={this.handleEditChange}/>
                     <input id="update-button" type="submit" value="Update Details" />
                 </form>
             </details>
@@ -109,21 +120,15 @@ class App extends React.Component {
                 description: '',
                 image: ''
             })
-            document.getElementById('name').value = ""
             document.getElementById('date').value = ""
             document.getElementById('description').value = ""
             document.getElementById('image').value = ""
         })
     }
-    updateTrip = (event) => {
-        event.preventDefault()
-        axios.put('/trips/' + event.target.id, this.state).then((res) => {
+    updateTripsArr = (event) => {
+        axios.get("/trips").then((res) => {
             this.setState({
-                trips: res.data,
-                name: '',
-                date: '',
-                description: '',
-                image: ''
+                trips: res.data
             })
         })
     }
@@ -144,7 +149,7 @@ class App extends React.Component {
     render = () => {
         return <div>
             <h1>Trips On Trips</h1>
-            <Show handleSubmit={this.handleSubmit} handleChange={this.handleChange} deleteTrip={this.deleteTrip} updateTrip={this.updateTrip} state={this.state}></Show>
+            <Show handleSubmit={this.handleSubmit} handleChange={this.handleChange} deleteTrip={this.deleteTrip} updateTripsArr={this.updateTripsArr} state={this.state}></Show>
             <Create handleSubmit={this.handleSubmit} handleChange={this.handleChange} state={this.state}></Create>
         </div>
     }
