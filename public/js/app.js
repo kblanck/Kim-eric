@@ -1,34 +1,37 @@
 // Create Component
 class Create extends React.Component {
     render = () => {
-        return <div id="create-trip-container">
+        return <div>
             <h3>Add a Trip!</h3>
+            <div id="create-trip-container">
+                <div id="polaroid-square">
+                    <form id="create" onSubmit={this.props.handleSubmit}>
 
-            <form onSubmit={this.props.handleSubmit}>
+                        <label htmlFor="name">Where to?</label>
+                        <br/>
+                        <input type="text" id="name" onChange={this.props.handleChange} />
+                        <br/>
 
-                <label htmlFor="name">Name</label>
-                <br/>
-                <input type="text" id="name" onChange={this.props.handleChange} />
-                <br/>
+                        <label htmlFor="date">Dates to Travel</label>
+                        <br/>
+                        <input type="date" id="date" onChange={this.props.handleChange} />
+                        <br/>
 
-                <label htmlFor="date">Dates to Travel</label>
-                <br/>
-                <input type="text" id="date" onChange={this.props.handleChange} />
-                <br/>
+                        <label htmlFor="image">Image URL</label>
+                        <br/>
+                        <input type="text" id="image" onChange={this.props.handleChange} />
+                        <br/>
 
-                <label htmlFor="description">Description</label>
-                <br/>
-                <input type="text" id="description" onChange={this.props.handleChange} />
-                <br/>
+                        <label htmlFor="description">Notes</label>
+                        <br/>
+                        <textarea id="description" onChange={this.props.handleChange} />
+                        <br/>
 
-                <label htmlFor="image">Image</label>
-                <br/>
-                <input type="text" id="image" onChange={this.props.handleChange} />
-                <br/>
+                        <input type="submit" value="Add This Trip" />
 
-                <input type="submit" value="Add This Trip" />
-
-            </form>
+                    </form>
+                </div>
+            </div>
         </div>
     }
 }
@@ -36,20 +39,34 @@ class Create extends React.Component {
 // Show Component
 class Show extends React.Component {
     render = () => {
-        return <div id="show-trip-container">
-            <ul>
+        return <ul id="show-trip-container">
                 {this.props.state.trips.map((trip) => {
                     return <li key={trip._id}>
+
+
                         <img src={trip.image} />
                         <br/>
 
-                        <p>{trip.name}</p>
+{/*
+                        <h5>
+                            Where to?
+                        </h5>
+                        <br/> */}
+
+                        <strong>{trip.name}</strong>
                         <br/>
 
-                        <p>{trip.date}</p>
+                        {trip.date}
                         <br/>
 
-                        <p>{trip.description}</p>
+                        <h6 id="notes">
+                            Notes
+                        </h6>
+                        <br/>
+
+                        <span id="describe">
+                            {trip.description}
+                        </span>
                         <br/>
 
                         <button value={trip._id} onClick={this.props.deleteTrip}>
@@ -61,7 +78,6 @@ class Show extends React.Component {
                     </li>
                 })}
             </ul>
-        </div>
     }
 }
 
@@ -72,29 +88,15 @@ class Edit extends React.Component {
             <details>
                 <summary>Edit Trip Details</summary>
                 <form id={this.props.trip._id} onSubmit={this.props.updateTrip}>
-
                     <label htmlFor="name">Name</label>
-                    <br/>
                     <input type="text" id="name" defaultValue={this.props.trip.name} onChange={this.props.handleChange}/>
-                    <br/>
-
                     <label htmlFor="date">Date</label>
-                    <br/>
-                    <input type="text" id="date" defaultValue={this.props.trip.date} onChange={this.props.handleChange}/>
-                    <br/>
-
+                    <input type="date" id="date" defaultValue={this.props.trip.date} onChange={this.props.handleChange}/>
                     <label htmlFor="description">Description</label>
-                    <br/>
                     <input type="text" id="description" defaultValue={this.props.trip.description} onChange={this.props.handleChange}/>
-                    <br/>
-
                     <label htmlFor="name">Image</label>
-                    <br/>
                     <input type="text" id="image" defaultValue={this.props.trip.image} onChange={this.props.handleChange}/>
-                    <br/>
-
-                    <input type="submit" value="Update Details" />
-
+                    <input id="update-button" type="submit" value="Update Details" />
                 </form>
             </details>
         </div>
@@ -117,6 +119,11 @@ class App extends React.Component {
             [event.target.id]: event.target.value
         })
     }
+    // handleImageUpload = (event) => {
+    //     this.setState({
+    //         image: event.target.files[0]
+    //     })
+    // }
     handleSubmit = (event) => {
         event.preventDefault()
         axios.post('/trips', this.state).then((response) => {
@@ -127,11 +134,10 @@ class App extends React.Component {
                 description: '',
                 image: ''
             })
-            document.getElementById('name').value = ""
+            $('#name').val('')
             document.getElementById('date').value = ""
             document.getElementById('description').value = ""
             document.getElementById('image').value = ""
-
         })
     }
     updateTrip = (event) => {
@@ -162,11 +168,11 @@ class App extends React.Component {
     }
     render = () => {
         return <div>
-            <h1>Trips on Trips</h1>
+            <h1>Trips On Trips</h1>
 
-            <Create handleSubmit={this.handleSubmit} handleChange={this.handleChange} state={this.state}></Create>
-            <hr/>
             <Show handleSubmit={this.handleSubmit} handleChange={this.handleChange} deleteTrip={this.deleteTrip} updateTrip={this.updateTrip} state={this.state}></Show>
+
+            <Create handleSubmit={this.handleSubmit} handleChange={this.handleChange} handleImageUpload={this.handleImageUpload} state={this.state}></Create>
 
         </div>
     }
@@ -176,3 +182,9 @@ ReactDOM.render(
     <App></App>,
     document.querySelector('main')
 )
+
+$(() => {
+    $("body").on("click", "#update-button", () => {
+        $("details").removeAttr("open")
+    })
+})

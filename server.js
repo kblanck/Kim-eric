@@ -11,6 +11,7 @@ const MONGODB_URI = process.env.MONGODB_URI
 // Middleware
 app.use(express.json())
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: false }))
 
 // Controllers
 const tripsController = require('./controllers/trips_controller.js')
