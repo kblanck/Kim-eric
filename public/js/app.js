@@ -5,7 +5,7 @@ class Create extends React.Component {
             <h3>Add a Trip!</h3>
             <div id="create-trip-container">
                 <div id="polaroid-square">
-                    <form id="create" enctype="multipart/form-data" onSubmit={this.props.handleSubmit}>
+                    <form id="create" onSubmit={this.props.handleSubmit}>
 
                         <label htmlFor="name">Where to?</label>
                         <br/>
@@ -19,7 +19,7 @@ class Create extends React.Component {
 
                         <label htmlFor="image">Image URL</label>
                         <br/>
-                        <input type="file" id="image" onChange={this.props.handleChange} />
+                        <input type="text" id="image" onChange={this.props.handleChange} />
                         <br/>
 
                         <label htmlFor="description">Notes</label>
@@ -119,6 +119,11 @@ class App extends React.Component {
             [event.target.id]: event.target.value
         })
     }
+    // handleImageUpload = (event) => {
+    //     this.setState({
+    //         image: event.target.files[0]
+    //     })
+    // }
     handleSubmit = (event) => {
         event.preventDefault()
         axios.post('/trips', this.state).then((response) => {
@@ -129,11 +134,10 @@ class App extends React.Component {
                 description: '',
                 image: ''
             })
-            document.getElementById('name').value = ""
+            $('#name').val('')
             document.getElementById('date').value = ""
             document.getElementById('description').value = ""
             document.getElementById('image').value = ""
-
         })
     }
     updateTrip = (event) => {
@@ -168,7 +172,7 @@ class App extends React.Component {
 
             <Show handleSubmit={this.handleSubmit} handleChange={this.handleChange} deleteTrip={this.deleteTrip} updateTrip={this.updateTrip} state={this.state}></Show>
 
-            <Create handleSubmit={this.handleSubmit} handleChange={this.handleChange} state={this.state}></Create>
+            <Create handleSubmit={this.handleSubmit} handleChange={this.handleChange} handleImageUpload={this.handleImageUpload} state={this.state}></Create>
 
         </div>
     }
@@ -180,7 +184,7 @@ ReactDOM.render(
 )
 
 $(() => {
-    $("body").on("click", "#update-button",() => {
+    $("body").on("click", "#update-button", () => {
         $("details").removeAttr("open")
     })
 })
