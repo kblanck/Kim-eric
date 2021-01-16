@@ -5,7 +5,9 @@ class Create extends React.Component {
             <h3>Add a Trip!</h3>
             <div id="create-trip-container">
                 <div id="polaroid-square">
-                    <form id="create" onSubmit={this.props.handleSubmit}>
+
+                    <form id="create" encType="multipart/form-data" onSubmit={this.props.handleSubmit}>
+
 
                         <label htmlFor="name">Where to?</label>
                         <br/>
