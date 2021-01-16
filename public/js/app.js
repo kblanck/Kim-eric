@@ -17,7 +17,7 @@ class Create extends React.Component {
                         <input type="date" id="date" onChange={this.props.handleChange} />
                         <br/>
 
-                        <label htmlFor="image">Image URL</label>
+                        <label htmlFor="image">Image</label>
                         <br/>
                         <input type="file" id="image" onChange={this.props.handleChange} />
                         <br/>
