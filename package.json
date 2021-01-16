@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Eric and Kim Project",
   "engines": {
-    "node": "15.1.0"
+    "node": "15.1.0",
+    "npm": "7.0.8"
   },
   "main": "server.js",
   "scripts": {
