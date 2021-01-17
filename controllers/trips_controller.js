@@ -1,6 +1,7 @@
 // Dependencies
 const express = require('express')
 const Trip = require('../models/trip.js')
+const cloudinary = require('cloudinary').v2
 
 // Router & Routes
 const trips = express.Router()
@@ -14,11 +15,38 @@ trips.get('/', (req, res) => {
 
 // Create Route
 trips.post('/', (req, res) => {
-    Trip.create(req.body, (err, createdTrip) => {
-        Trip.find({}, (err, foundTrips) => {
-            res.json(foundTrips)
+    console.log(req.files)
+    console.log(req.body)
+    if (!req.files) {
+        req.body.image = 'https://www.silverkris.com/wp-content/uploads/2018/05/Nature-and-Adventure-1920x1069-960x530.jpg'
+        Trip.create(req.body, (err, newTrip) => {
+            if (err) {
+                console.log(err)
+            } else {
+                Trip.find({}, (err, foundTrips) => {
+                    res.json(foundTrips)
+                })
+            }
         })
-    })
+    } else {
+        const img = req.files.image
+        cloudinary.uploader.upload(img.tempFilePath, (err, data) => {
+            if (err) {
+                console.log(err)
+            } else {
+                req.body.image = data.url
+                Trip.create(req.body, (err, newTrip) => {
+                    if (err) {
+                        console.log(err)
+                    } else {
+                        Trip.find({}, (err, foundTrips) => {
+                            res.json(foundTrips)
+                        })
+                    }
+                })
+            }
+        })
+    }
 })
 
 // Edit Route
