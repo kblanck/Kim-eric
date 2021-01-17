@@ -5,10 +5,7 @@ class Create extends React.Component {
             <h3>Add a Trip!</h3>
             <div id="create-trip-container">
                 <div id="polaroid-square">
-
                     <form id="create" encType="multipart/form-data" onSubmit={this.props.handleSubmit}>
-
-
                         <label htmlFor="name">Where to?</label>
                         <br/>
                         <input type="text" id="name" value={this.props.state.name} onChange={this.props.handleChange} />
@@ -19,7 +16,7 @@ class Create extends React.Component {
                         <br/>
                         <label htmlFor="image">Image</label>
                         <br/>
-                        <input type="text" id="image" value={this.props.state.image} onChange={this.props.handleChange} />
+                        <input type="file" id="image" name="image" onChange={this.props.handleFileChange} />
                         <br/>
                         <label htmlFor="description">Notes</label>
                         <br/>
@@ -102,7 +99,7 @@ class App extends React.Component {
         name: '',
         date: '',
         description: '',
-        image: '',
+        image: null,
         trips: []
     }
     handleChange = (event) => {
@@ -110,29 +107,42 @@ class App extends React.Component {
             [event.target.id]: event.target.value
         })
     }
-    handleSubmit = (event) => {
-        event.preventDefault()
-        axios.post('/trips', this.state).then((response) => {
-            this.setState({
-                trips: response.data,
-                name: '',
-                date: '',
-                description: '',
-                image: ''
-            })
-            document.getElementById('date').value = ""
-            document.getElementById('description').value = ""
-            document.getElementById('image').value = ""
+    handleFileChange = (event) => {
+        this.setState({
+            image: event.target.files[0],
         })
     }
+    handleSubmit = (event) => {
+        event.preventDefault()
+        const formData = new FormData()
+        formData.append('name', this.state.name)
+        formData.append('date', this.state.date)
+        formData.append('description', this.state.description)
+        formData.append('image', this.state.image)
+        axios
+            .post('/trips', formData, {headers: {'Content-Type': 'form-data'}})
+            .then((res) => {
+                this.setState({
+                    trips: res.data,
+                    name: '',
+                    date: '',
+                    description: '',
+                    image: null
+                })
+            })
+    }
     updateTripsArr = (event) => {
-        axios.get("/trips").then((res) => {
+        axios.get('/trips').then((res) => {
             this.setState({
                 trips: res.data
             })
         })
     }
     deleteTrip = (event) => {
+       let deletePrompt = prompt('Are you sure you want to delete?');
+       if (deletePrompt === null) {
+           return;
+       }
         axios.delete('/trips/' + event.target.value).then((res) => {
             this.setState({
                 trips: res.data
@@ -150,7 +160,7 @@ class App extends React.Component {
         return <div>
             <h1>Trips On Trips</h1>
             <Show handleSubmit={this.handleSubmit} handleChange={this.handleChange} deleteTrip={this.deleteTrip} updateTripsArr={this.updateTripsArr} state={this.state}></Show>
-            <Create handleSubmit={this.handleSubmit} handleChange={this.handleChange} state={this.state}></Create>
+            <Create handleSubmit={this.handleSubmit} handleChange={this.handleChange} handleFileChange={this.handleFileChange} state={this.state}></Create>
         </div>
     }
 }
