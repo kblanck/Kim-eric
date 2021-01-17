@@ -49,7 +49,7 @@ class Show extends React.Component {
                         <br/>
                         {trip.date}
                         <br/>
-                        <h6 id="notes">
+                        <h6>
                             Notes
                         </h6>
                         <br/>
@@ -153,6 +153,7 @@ class App extends React.Component {
     render = () => {
         return <div>
             <h1>Trips On Trips</h1>
+            <h2>Where are we going in 2022?</h2>
             <Show handleSubmit={this.handleSubmit} handleChange={this.handleChange} deleteTrip={this.deleteTrip} updateTripsArr={this.updateTripsArr} state={this.state}></Show>
             <Create handleSubmit={this.handleSubmit} handleChange={this.handleChange} state={this.state}></Create>
         </div>

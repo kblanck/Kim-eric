@@ -11,6 +11,12 @@ h1 {
     margin: .2em;
 }
 
+h2 {
+    text-align: center;
+    font-family: 'Lora', serif;
+    background-color: ghostwhite;
+}
+
 h3 {
     text-align: center;
     font-family: 'Lora', serif;
@@ -34,7 +40,7 @@ h6 {
     background-color: gold;
     /* border: 1px solid black; */
     padding: .25em;
-    margin: -1em;
+    margin: -1em 0 -1.5em 0;
     transform: rotate(-5deg)
 }
 
