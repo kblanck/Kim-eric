@@ -59,8 +59,8 @@ render = () => {
                                     return <li id="comment-li" key={comment._id}>
                                     <strong>{comment.commenter}:</strong> {comment.comment}
                                     </li>
-                                })
-                            : <li id="comment-li">No comments yet</li>    
+                                }).reverse()
+                            : <li id="no-comments">No comments yet</li>    
                         }
                         </ul>
                     </div>
