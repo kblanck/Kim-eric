@@ -4,41 +4,55 @@ body {
     font-size: .8em;
 }
 
+#main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 h1 {
     text-align: center;
     font-family: 'Lora', serif;
+    text-shadow: 3px 3px ghostwhite;
     font-size: 6em;
     margin: .2em;
 }
 
-h2 {
+#where {
+    align-self: center;
     text-align: center;
     font-family: 'Lora', serif;
-    background-color: ghostwhite;
+    font-size: 1.8em;
+    background-color:gold;
+    padding: 0 1em 0 1em;
+    transform: rotate(-2deg);
 }
 
-h3 {
+#vaccine {
+    align-self: center;
     text-align: center;
     font-family: 'Lora', serif;
-    font-size: 4em;
-    margin: .2em;
+    font-size: .9em;
+    background-color: rgb(221, 35, 35);
+    color: ghostwhite;
+    font-weight: 400;
+    padding: 0 1em 0 1em;
+    transform: translate(50%,-50%) rotate(3deg);
+    margin-top: .7em;
 }
 
-/*
 h5 {
-    width: 55px;
-    font-size: .8em;
-    background-color: rgb(245, 132, 245);
-    padding: .25em;
-    margin: -1em;
+    text-align: center;
+    font-family: 'Lora', serif;
+    font-size: 3em;
+    margin: 0 0 -.5em 0;
 }
-*/
 
 h6 {
+    align-self: center;
     width: 40px;
     font-size: .8em;
     background-color: gold;
-    /* border: 1px solid black; */
     padding: .25em;
     margin: -1em 0 -1.5em 0;
     transform: rotate(-5deg)
@@ -75,7 +89,22 @@ img {
     margin-bottom: 1em;
 }
 
+button {
+    background-color: ghostwhite;
+    font-size: .8em;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-top: .5em;
+    transition: ease-in .5s;
+}
+
+button:hover {
+    background-color: rgb(221, 35, 35);
+    color: ghostwhite;
+    cursor: pointer;
+}
 /* Edit Container  */
+
 details[open] {
     background-color: rgba(0, 0, 0, 0.4);
     color: ghostwhite;
@@ -88,8 +117,12 @@ details[open] {
 details>summary {
     text-align: center;
     cursor: pointer;
-    font-size: .8rem;
-    padding: .5em;
+    font-size: .7rem;
+    padding: .5em 0 0 0;
+}
+
+details>summary:hover {
+    text-decoration: bold;
 }
 
 details>summary::-webkit-details-marker {
@@ -136,9 +169,11 @@ details input {
     padding: .5em;
 }
 
+input[type=date] {
+    font-family: Helvetica;
+}
+
 #description {
     resize: none;
-    width: 140px;
     font-family: Helvetica;
-    font-size: .8em;
 }
