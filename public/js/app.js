@@ -52,7 +52,7 @@ class Show extends React.Component {
 
                         <br/>
                         <Edit handleSubmit={this.props.handleSubmit} deleteTrip={this.props.deleteTrip} updateTripsArr={this.props.updateTripsArr} state={this.props.state} trip={trip}></Edit>
-
+                        <Comment handleSubmit={this.props.handleSubmit} updateTripsArr={this.props.updateTripsArr} state={this.props.state} trip={trip}></Comment>
                         <button value={trip._id} onClick={this.props.deleteTrip}>
                             Remove
                         </button>
@@ -72,11 +72,6 @@ class Edit extends React.Component {
         axios.put('/trips/' + event.target.id, this.props.trip).then((res) => {})
         this.props.updateTripsArr()
     }
-    addComment = (event) => {
-        event.preventDefault()
-        axios.put('/trips/' + event.target.id, this.props.trip).then((res) => {})
-        this.props.addCommentArr()
-    }
     render = () => {
         return <div id="edit-trip-container">
             <details>
@@ -93,17 +88,49 @@ class Edit extends React.Component {
                     <input id="update-button" type="submit" value="Update Details" />
                 </form>
             </details>
-            <details>
-                <summary>Add a Comment! &#128077;</summary>
-                <form id={this.props.trip._id}>
-                    <label htmlFor="name">Name</label>
-                    <input type="text" id="comment-name" />
-                    <label htmlFor="description">Comment</label>
-                    <input type="text" id="comment" />
-                    <input id="update-button" type="submit" value="Add Your Comment" />
-                </form>
-            </details>
         </div>
+    }
+}
+// Comment Component
+class Comment extends React.Component {
+    state = {
+        commenter: '',
+        comment: '',
+    }
+    handleCommentChange = () => {
+        this.setState({
+            [event.target.id]: event.target.value
+        })
+    }
+    addComment = (event) => {
+        event.preventDefault()
+        this.props.trip.comments.push(this.state)
+        axios.put('/trips/' + event.target.id, this.props.trip).then((res) => {
+            this.setState({
+                commenter: '',
+                comment: '',
+            })
+        })
+        this.props.updateTripsArr()
+    }
+    render = () => {
+        return <details>
+            <summary>Add a Comment! &#128077;</summary>
+            <form id={this.props.trip._id} onSubmit={this.addComment}>
+                <label htmlFor="commenter">Name</label>
+                <input type="text" id="commenter" onChange={this.handleCommentChange} value={this.state.commenter}/>
+                <label htmlFor="comment">Comment</label>
+                <input type="text" id="comment" onChange={this.handleCommentChange} value={this.state.comment}/>
+                <input id="update-button" type="submit" value="Add Your Comment" />
+            </form>
+            <ul id="comment-list">
+                {this.props.trip.comments.map((comment) => {
+                    return <li key={comment._id}>
+                        <p>{comment.commenter}: {comment.comment}</p>
+                    </li>
+                })}
+            </ul>
+        </details>
     }
 }
 // Parent Component
@@ -113,7 +140,8 @@ class App extends React.Component {
         date: '',
         description: '',
         image: null,
-        trips: []
+        trips: [],
+        comments: [],
     }
     handleChange = (event) => {
         this.setState({
