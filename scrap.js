@@ -29,54 +29,39 @@ class Create extends React.Component {
         </div>
     }
 }
-
 // Show Component
 class Show extends React.Component {
-render = () => {
-    return <ul id="show-trip-container">
-            {this.props.state.trips.map((trip) => {
-                return <li key={trip._id}>
-                    <img src={trip.image} />
-                    <br/>
+    render = () => {
+        return <ul id="show-trip-container">
+                {this.props.state.trips.map((trip) => {
+                    return <li key={trip._id}>
+                        <img src={trip.image} />
+                        <br/>
 
-                    <strong>
-                        {trip.name}
-                    </strong>
-                    <br/>
-                    {trip.date}
-                    <br/>
+                        <strong>
+                            {trip.name}
+                        </strong>
+                        <br/>
+                        {trip.date}
+                        <br/>
 
-                    <div id="describe">
-                        <h6 id="notes">Notes</h6>
-                        {trip.description}
-                    </div>
+                        <div id="describe">
+                            <h6>Notes</h6>
+                            {trip.description}
+                        </div>
 
-                    <h6 id ="comments">Comments</h6>
-                    <div id="comment-list">
-                        <ul id="comment-ul">
-                        {(trip.comments.length > 0) ? 
-                                trip.comments.map((comment) => {
-                                    return <li id="comment-li" key={comment._id}>
-                                    <strong>{comment.commenter}:</strong> {comment.comment}
-                                    </li>
-                                }).reverse()
-                            : <li id="no-comments">No comments yet</li>    
-                        }
-                        </ul>
-                    </div>
+                        <br/>
+                        <Edit handleSubmit={this.props.handleSubmit} deleteTrip={this.props.deleteTrip} updateTripsArr={this.props.updateTripsArr} state={this.props.state} trip={trip}></Edit>
+                        <Comment handleSubmit={this.props.handleSubmit} updateTripsArr={this.props.updateTripsArr} state={this.props.state} trip={trip}></Comment>
+                        <button value={trip._id} onClick={this.props.deleteTrip}>
+                            Remove
+                        </button>
 
-                    <br/>
-                    <Edit handleSubmit={this.props.handleSubmit} deleteTrip={this.props.deleteTrip} updateTripsArr={this.props.updateTripsArr} state={this.props.state} trip={trip}></Edit>
-                    <Comment handleSubmit={this.props.handleSubmit} updateTripsArr={this.props.updateTripsArr} state={this.props.state} trip={trip}></Comment>
-                    <button value={trip._id} onClick={this.props.deleteTrip}>
-                        Remove
-                    </button>
-                </li>
-            })}
-        </ul>
+                    </li>
+                })}
+            </ul>
     }
 }
-
 // Edit Component
 class Edit extends React.Component {
     handleEditChange = () => {
@@ -90,7 +75,7 @@ class Edit extends React.Component {
     render = () => {
         return <div id="edit-trip-container">
             <details>
-                <summary>Edit Trip Details</summary>
+                <summary>Edit Trip Details &#9999;&#65039;</summary>
                 <form id={this.props.trip._id} onSubmit={this.updateTrip}>
                     <label htmlFor="name">Name</label>
                     <input type="text" id="name" defaultValue={this.props.trip.name} onChange={this.handleEditChange}/>
@@ -129,9 +114,8 @@ class Comment extends React.Component {
         this.props.updateTripsArr()
     }
     render = () => {
-        return <div id="add-comment-container">
-        <details>
-            <summary>Add a Comment!</summary>
+        return <details>
+            <summary>Add a Comment! &#128077;</summary>
             <form id={this.props.trip._id} onSubmit={this.addComment}>
                 <label htmlFor="commenter">Name</label>
                 <input type="text" id="commenter" onChange={this.handleCommentChange} value={this.state.commenter}/>
@@ -139,8 +123,14 @@ class Comment extends React.Component {
                 <input type="text" id="comment" onChange={this.handleCommentChange} value={this.state.comment}/>
                 <input id="update-button" type="submit" value="Add Your Comment" />
             </form>
+            <ul id="comment-list">
+                {this.props.trip.comments.map((comment) => {
+                    return <li key={comment._id}>
+                        <p>{comment.commenter}: {comment.comment}</p>
+                    </li>
+                })}
+            </ul>
         </details>
-        </div>
     }
 }
 // Parent Component
@@ -235,7 +225,6 @@ ReactDOM.render(
     <App></App>,
     document.querySelector('main')
 )
-
 $(() => {
     $("body").on("click", "#update-button",() => {
         $("details").removeAttr("open")
