@@ -18,10 +18,6 @@ h1 {
     margin: .2em;
 }
 
-hr { 
-    display: block;
-}
-
 #where {
     align-self: center;
     text-align: center;
@@ -52,7 +48,7 @@ h5 {
     margin: 0 0 -.5em 0;
 }
 
-h6 {
+#notes {
     width: 40px;
     font-size: .8em;
     background-color: gold;
@@ -63,11 +59,42 @@ h6 {
     margin-bottom: .5em;
 }
 
+#comments {
+    width: 50px;
+    font-size: .8em;
+    background-color: rgb(221, 35, 35);
+    color: ghostwhite;
+    padding: .25em;
+    margin:0;
+    transform: translateY(-5px) rotate(-4deg);
+    margin-bottom: .5em;
+}
+
 #describe {
     margin-top: 1em;
     padding: .5em;
     font-size: .8em;
     background-color: rgb(242, 242, 243);
+}
+
+#comment-list {
+    text-align: left;
+    margin-top: 1em;
+    padding: .5em;
+    font-size: .8em;
+    background-color: rgb(242, 242, 243);
+}
+
+#comment-ul {
+    padding: 0;
+    margin: 0;
+    transform: translateY(-10px);
+}
+
+#comment-li {
+    margin: 0;
+    padding: 0;
+    padding-left: -2em;
 }
 
 /* Show Container */
@@ -111,14 +138,19 @@ button:hover {
     color: ghostwhite;
     cursor: pointer;
 }
-/* Edit Container  */
+/* Edit and Comment Container  */
 
 #edit-trip-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     margin-top: -.5em;
+}
+
+#add-comment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 details[open] {
