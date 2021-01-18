@@ -53,23 +53,21 @@ h5 {
 }
 
 h6 {
-    align-self: center;
     width: 40px;
     font-size: .8em;
     background-color: gold;
+    border: 1px solid darkgray;
     padding: .25em;
-    margin: -1em 0 -1.5em 0;
-    transform: translate(-35%, 20%) rotate(-10deg);
+    margin: -1em 0 0 0;
+    transform: translateY(-5px) rotate(-4deg);
+    margin-bottom: .5em;
 }
 
 #describe {
-    position: relative;
-    width: 150px;
+    margin-top: 1em;
     padding: .5em;
     font-size: .8em;
-    transform: translateX(.9em);
     background-color: rgb(242, 242, 243);
-    z-index:-1;
 }
 
 /* Show Container */
