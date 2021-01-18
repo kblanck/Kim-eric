@@ -113,6 +113,14 @@ button:hover {
 }
 /* Edit Container  */
 
+#edit-trip-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: -.5em;
+}
+
 details[open] {
     background-color: rgba(0, 0, 0, 0.4);
     color: ghostwhite;
@@ -123,11 +131,17 @@ details[open] {
 }
 
 details>summary {
+    align-self: center;
+    width: 90px;
+    padding: .25em;
+    background-color: ghostwhite;
+    color: black;
+    font-size: .8em;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin: .5em .5em 0 0;
     text-align: center;
     cursor: pointer;
-    font-size: .7rem;
-    padding: 0;
-    margin: 0;
 }
 
 details>summary:hover {
