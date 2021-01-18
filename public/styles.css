@@ -98,6 +98,12 @@ h5 {
     margin: 0;
 }
 
+#no-comments {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
 /* Show Container */
 #show-trip-container {
     text-align: center;
@@ -113,7 +119,7 @@ li {
     display: inline-block;
     vertical-align: top;
     padding: 1.5em;
-    width: 20vw;
+    width: 25vw;
 }
 
 img {
