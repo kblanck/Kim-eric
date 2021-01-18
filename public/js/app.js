@@ -44,11 +44,9 @@ class Show extends React.Component {
                         <br/>
                         {trip.date}
                         <br/>
-                        <h6>
-                            Notes
-                        </h6>
-                        <br/>
+
                         <div id="describe">
+                            <h6>Notes</h6>
                             {trip.description}
                         </div>
 
