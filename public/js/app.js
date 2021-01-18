@@ -51,18 +51,16 @@ render = () => {
                         {trip.description}
                     </div>
 
+                    <h6 id ="comments">Comments</h6>
                     <div id="comment-list">
-                        <h6 id ="comments">
-                            Comments
-                        </h6>
                         <ul id="comment-ul">
                         {(trip.comments.length > 0) ? 
                                 trip.comments.map((comment) => {
-                                    return <li id="comment-id" key={comment._id}>
+                                    return <li id="comment-li" key={comment._id}>
                                     <strong>{comment.commenter}:</strong> {comment.comment}
                                     </li>
                                 })
-                            : <li id="comment-id">No comments yet</li>    
+                            : <li id="comment-li">No comments yet</li>    
                         }
                         </ul>
                     </div>
