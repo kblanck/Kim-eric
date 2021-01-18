@@ -75,7 +75,7 @@ class Edit extends React.Component {
     render = () => {
         return <div id="edit-trip-container">
             <details>
-                <summary>Edit Trip Details &#9999;&#65039;</summary>
+                <summary>Edit Trip Details</summary>
                 <form id={this.props.trip._id} onSubmit={this.updateTrip}>
                     <label htmlFor="name">Name</label>
                     <input type="text" id="name" defaultValue={this.props.trip.name} onChange={this.handleEditChange}/>
