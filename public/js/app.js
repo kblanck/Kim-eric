@@ -114,8 +114,9 @@ class Comment extends React.Component {
         this.props.updateTripsArr()
     }
     render = () => {
-        return <details>
-            <summary>Add a Comment! &#128077;</summary>
+        return <div id="add-comment-container">
+        <details>
+            <summary>Add a Comment!</summary>
             <form id={this.props.trip._id} onSubmit={this.addComment}>
                 <label htmlFor="commenter">Name</label>
                 <input type="text" id="commenter" onChange={this.handleCommentChange} value={this.state.commenter}/>
@@ -131,6 +132,7 @@ class Comment extends React.Component {
                 })}
             </ul>
         </details>
+        </div>
     }
 }
 // Parent Component

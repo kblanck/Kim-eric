@@ -111,14 +111,19 @@ button:hover {
     color: ghostwhite;
     cursor: pointer;
 }
-/* Edit Container  */
+/* Edit and Comment Container  */
 
 #edit-trip-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     margin-top: -.5em;
+}
+
+#add-comment-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 details[open] {
