@@ -18,6 +18,10 @@ h1 {
     margin: .2em;
 }
 
+hr { 
+    display: block;
+}
+
 #where {
     align-self: center;
     text-align: center;
@@ -55,11 +59,17 @@ h6 {
     background-color: gold;
     padding: .25em;
     margin: -1em 0 -1.5em 0;
-    transform: rotate(-5deg)
+    transform: translate(-35%, 20%) rotate(-10deg);
 }
 
 #describe {
+    position: relative;
+    width: 150px;
+    padding: .5em;
     font-size: .8em;
+    transform: translateX(.9em);
+    background-color: rgb(242, 242, 243);
+    z-index:-1;
 }
 
 /* Show Container */
@@ -76,7 +86,7 @@ li {
     margin: 1em 1em 1em 0;
     display: inline-block;
     vertical-align: top;
-    padding: 1em;
+    padding: 1.5em;
     width: 20vw;
 }
 
@@ -118,7 +128,8 @@ details>summary {
     text-align: center;
     cursor: pointer;
     font-size: .7rem;
-    padding: .5em 0 0 0;
+    padding: 0;
+    margin: 0;
 }
 
 details>summary:hover {

@@ -48,9 +48,9 @@ class Show extends React.Component {
                             Notes
                         </h6>
                         <br/>
-                        <span id="describe">
+                        <div id="describe">
                             {trip.description}
-                        </span>
+                        </div>
 
                         <br/>
                         <Edit handleSubmit={this.props.handleSubmit} deleteTrip={this.props.deleteTrip} updateTripsArr={this.props.updateTripsArr} state={this.props.state} trip={trip}></Edit>
@@ -82,7 +82,7 @@ class Edit extends React.Component {
     render = () => {
         return <div id="edit-trip-container">
             <details>
-                <summary>Edit Trip Details</summary>
+                <summary>Edit Trip Details &#9999;&#65039;</summary>
                 <form id={this.props.trip._id} onSubmit={this.updateTrip}>
                     <label htmlFor="name">Name</label>
                     <input type="text" id="name" defaultValue={this.props.trip.name} onChange={this.handleEditChange}/>
@@ -96,7 +96,7 @@ class Edit extends React.Component {
                 </form>
             </details>
             <details>
-                <summary>Add a Comment!</summary>
+                <summary>Add a Comment! &#128077;</summary>
                 <form id={this.props.trip._id}>
                     <label htmlFor="name">Name</label>
                     <input type="text" id="comment-name" />
