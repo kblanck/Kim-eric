@@ -2,7 +2,7 @@
 class Create extends React.Component {
     render = () => {
         return <div>
-            <h3>Add a Trip!</h3>
+            <h5>Add a Trip!</h5>
             <div id="create-trip-container">
                 <div id="polaroid-square">
                     <form id="create" encType="multipart/form-data" onSubmit={this.props.handleSubmit}>
@@ -16,7 +16,7 @@ class Create extends React.Component {
                         <br/>
                         <label htmlFor="image">Image</label>
                         <br/>
-                        <input type="text" id="image" value={this.props.state.image} onChange={this.props.handleChange} />
+                        <input type="file" id="image" name="image" onChange={this.props.handleFileChange} />
                         <br/>
                         <label htmlFor="description">Notes</label>
                         <br/>
@@ -37,28 +37,26 @@ class Show extends React.Component {
                     return <li key={trip._id}>
                         <img src={trip.image} />
                         <br/>
-{/*
-                        <h5>
-                            Where to?
-                        </h5>
-                        <br/> */}
-                        <strong>{trip.name}</strong>
+
+                        <strong>
+                            {trip.name}
+                        </strong>
                         <br/>
                         {trip.date}
                         <br/>
-                        <h6 id="notes">
-                            Notes
-                        </h6>
-                        <br/>
-                        <span id="describe">
+
+                        <div id="describe">
+                            <h6>Notes</h6>
                             {trip.description}
-                        </span>
+                        </div>
+
                         <br/>
+                        <Edit handleSubmit={this.props.handleSubmit} deleteTrip={this.props.deleteTrip} updateTripsArr={this.props.updateTripsArr} state={this.props.state} trip={trip}></Edit>
+                        <Comment handleSubmit={this.props.handleSubmit} updateTripsArr={this.props.updateTripsArr} state={this.props.state} trip={trip}></Comment>
                         <button value={trip._id} onClick={this.props.deleteTrip}>
                             Remove
                         </button>
-                        <br/>
-                        <Edit handleSubmit={this.props.handleSubmit} deleteTrip={this.props.deleteTrip} updateTripsArr={this.props.updateTripsArr} state={this.props.state} trip={trip}></Edit>
+
                     </li>
                 })}
             </ul>
@@ -77,7 +75,7 @@ class Edit extends React.Component {
     render = () => {
         return <div id="edit-trip-container">
             <details>
-                <summary>Edit Trip Details</summary>
+                <summary>Edit Trip Details &#9999;&#65039;</summary>
                 <form id={this.props.trip._id} onSubmit={this.updateTrip}>
                     <label htmlFor="name">Name</label>
                     <input type="text" id="name" defaultValue={this.props.trip.name} onChange={this.handleEditChange}/>
@@ -93,37 +91,96 @@ class Edit extends React.Component {
         </div>
     }
 }
+// Comment Component
+class Comment extends React.Component {
+    state = {
+        commenter: '',
+        comment: '',
+    }
+    handleCommentChange = () => {
+        this.setState({
+            [event.target.id]: event.target.value
+        })
+    }
+    addComment = (event) => {
+        event.preventDefault()
+        this.props.trip.comments.push(this.state)
+        axios.put('/trips/' + event.target.id, this.props.trip).then((res) => {
+            this.setState({
+                commenter: '',
+                comment: '',
+            })
+        })
+        this.props.updateTripsArr()
+    }
+    render = () => {
+        return <details>
+            <summary>Add a Comment! &#128077;</summary>
+            <form id={this.props.trip._id} onSubmit={this.addComment}>
+                <label htmlFor="commenter">Name</label>
+                <input type="text" id="commenter" onChange={this.handleCommentChange} value={this.state.commenter}/>
+                <label htmlFor="comment">Comment</label>
+                <input type="text" id="comment" onChange={this.handleCommentChange} value={this.state.comment}/>
+                <input id="update-button" type="submit" value="Add Your Comment" />
+            </form>
+            <ul id="comment-list">
+                {this.props.trip.comments.map((comment) => {
+                    return <li key={comment._id}>
+                        <p>{comment.commenter}: {comment.comment}</p>
+                    </li>
+                })}
+            </ul>
+        </details>
+    }
+}
 // Parent Component
 class App extends React.Component {
     state = {
         name: '',
         date: '',
         description: '',
-        image: '',
-        trips: []
+        image: null,
+        trips: [],
+        comments: [],
     }
     handleChange = (event) => {
         this.setState({
             [event.target.id]: event.target.value
         })
     }
-    handleSubmit = (event) => {
-        event.preventDefault()
-        axios.post('/trips', this.state).then((response) => {
-            this.setState({
-                trips: response.data,
-                name: '',
-                date: '',
-                description: '',
-                image: ''
-            })
-            document.getElementById('date').value = ""
-            document.getElementById('description').value = ""
-            document.getElementById('image').value = ""
+    handleFileChange = (event) => {
+        this.setState({
+            image: event.target.files[0],
         })
     }
+    handleSubmit = (event) => {
+        event.preventDefault()
+        const formData = new FormData()
+        formData.append('name', this.state.name)
+        formData.append('date', this.state.date)
+        formData.append('description', this.state.description)
+        formData.append('image', this.state.image)
+        axios
+            .post('/trips', formData, {headers: {'Content-Type': 'form-data'}})
+            .then((res) => {
+                this.setState({
+                    trips: res.data,
+                    name: '',
+                    date: '',
+                    description: '',
+                    image: null
+                })
+            })
+    }
     updateTripsArr = (event) => {
-        axios.get("/trips").then((res) => {
+        axios.get('/trips').then((res) => {
+            this.setState({
+                trips: res.data
+            })
+        })
+    }
+    addCommentArr = (event) => {
+        axios.get('/trips').then((res) => {
             this.setState({
                 trips: res.data
             })
@@ -148,10 +205,19 @@ class App extends React.Component {
         })
     }
     render = () => {
-        return <div>
-            <h1>Trips On Trips</h1>
+        return <div id="main-container">
+            <h1>TRIPS ON TRIPS</h1>
+
+            <div id="where">
+                Where do we wanna go?
+            </div>
+
+            <div id="vaccine">
+                (once we get the vaccine)
+            </div>
+
             <Show handleSubmit={this.handleSubmit} handleChange={this.handleChange} deleteTrip={this.deleteTrip} updateTripsArr={this.updateTripsArr} state={this.state}></Show>
-            <Create handleSubmit={this.handleSubmit} handleChange={this.handleChange} state={this.state}></Create>
+            <Create handleSubmit={this.handleSubmit} handleChange={this.handleChange} handleFileChange={this.handleFileChange} state={this.state}></Create>
         </div>
     }
 }
