@@ -2,7 +2,7 @@
 class Create extends React.Component {
     render = () => {
         return <div>
-            <h3>Add a Trip!</h3>
+            <h5>Add a Trip!</h5>
             <div id="create-trip-container">
                 <div id="polaroid-square">
                     <form id="create" encType="multipart/form-data" onSubmit={this.props.handleSubmit}>
@@ -37,28 +37,28 @@ class Show extends React.Component {
                     return <li key={trip._id}>
                         <img src={trip.image} />
                         <br/>
-{/*
-                        <h5>
-                            Where to?
-                        </h5>
-                        <br/> */}
-                        <strong>{trip.name}</strong>
+
+                        <strong>
+                            {trip.name}
+                        </strong>
                         <br/>
                         {trip.date}
                         <br/>
-                        <h6 id="notes">
+                        <h6>
                             Notes
                         </h6>
                         <br/>
                         <span id="describe">
                             {trip.description}
                         </span>
+
                         <br/>
+                        <Edit handleSubmit={this.props.handleSubmit} deleteTrip={this.props.deleteTrip} updateTripsArr={this.props.updateTripsArr} state={this.props.state} trip={trip}></Edit>
+
                         <button value={trip._id} onClick={this.props.deleteTrip}>
                             Remove
                         </button>
-                        <br/>
-                        <Edit handleSubmit={this.props.handleSubmit} deleteTrip={this.props.deleteTrip} updateTripsArr={this.props.updateTripsArr} state={this.props.state} trip={trip}></Edit>
+
                     </li>
                 })}
             </ul>
@@ -74,6 +74,11 @@ class Edit extends React.Component {
         axios.put('/trips/' + event.target.id, this.props.trip).then((res) => {})
         this.props.updateTripsArr()
     }
+    addComment = (event) => {
+        event.preventDefault()
+        axios.put('/trips/' + event.target.id, this.props.trip).then((res) => {})
+        this.props.addCommentArr()
+    }
     render = () => {
         return <div id="edit-trip-container">
             <details>
@@ -88,6 +93,16 @@ class Edit extends React.Component {
                     <label htmlFor="name">Image</label>
                     <input type="text" id="image" defaultValue={this.props.trip.image} onChange={this.handleEditChange}/>
                     <input id="update-button" type="submit" value="Update Details" />
+                </form>
+            </details>
+            <details>
+                <summary>Add a Comment!</summary>
+                <form id={this.props.trip._id}>
+                    <label htmlFor="name">Name</label>
+                    <input type="text" id="comment-name" />
+                    <label htmlFor="description">Comment</label>
+                    <input type="text" id="comment" />
+                    <input id="update-button" type="submit" value="Add Your Comment" />
                 </form>
             </details>
         </div>
@@ -138,6 +153,13 @@ class App extends React.Component {
             })
         })
     }
+    addCommentArr = (event) => {
+        axios.get('/trips').then((res) => {
+            this.setState({
+                trips: res.data
+            })
+        })
+    }
     deleteTrip = (event) => {
         if (confirm("Are you sure you want to delete?")) {
             axios.delete('/trips/' + event.target.value).then((res) => {
@@ -157,8 +179,17 @@ class App extends React.Component {
         })
     }
     render = () => {
-        return <div>
-            <h1>Trips On Trips</h1>
+        return <div id="main-container">
+            <h1>TRIPS ON TRIPS</h1>
+
+            <div id="where">
+                Where do we wanna go?
+            </div>
+
+            <div id="vaccine">
+                (once we get the vaccine)
+            </div>
+
             <Show handleSubmit={this.handleSubmit} handleChange={this.handleChange} deleteTrip={this.deleteTrip} updateTripsArr={this.updateTripsArr} state={this.state}></Show>
             <Create handleSubmit={this.handleSubmit} handleChange={this.handleChange} handleFileChange={this.handleFileChange} state={this.state}></Create>
         </div>
