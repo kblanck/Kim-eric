@@ -96,7 +96,7 @@ class Edit extends React.Component {
                     <input type="text" id="name" defaultValue={this.props.trip.name} onChange={this.handleEditChange}/>
                     <label htmlFor="date">Date</label>
                     <input type="date" id="date" defaultValue={this.props.trip.date} onChange={this.handleEditChange}/>
-                    <label htmlFor="description">Description</label>
+                    <label htmlFor="description">Notes</label>
                     <input type="text" id="description" defaultValue={this.props.trip.description} onChange={this.handleEditChange}/>
                     <label htmlFor="name">Image</label>
                     <input type="text" id="image" defaultValue={this.props.trip.image} onChange={this.handleEditChange}/>
